@@ -1,25 +1,50 @@
 <template>
   <div>
-    <input type="number" v-model.number="age"><br>
-    <input
-      type="text"
-      v-model="password"
-    />
-    <p v-if="isValidPassword == false">Пароль не соответствует требованиям</p>
+    <custom-input
+      v-model="fromCustomInput"
+    ></custom-input>
+    <input type="text">
+    <input type="text" v-focus>
+    <button @click="addItem">Создать</button>
+    <custom-select
+      :items="items"
+      v-model="selectValue"
+    ></custom-select>
+    <button @click="toggle = !toggle">toggle</button>
+    <life-cycle v-if="toggle"></life-cycle>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from "vue";
 
-const password = ref("test");
-const age = ref(0);
+import CustomInput from "./components/CustomInput.vue";
+import CustomSelect from "./components/CustomSelect.vue";
+import LifeCycle from "./components/LifeCycle.vue";
 
-const isValidPassword = computed(() => {
-  console.log('isValidPassword called')
-  if (password.value.length < 7) return false;
-  return true;
-})
+const toggle = ref(true);
+const fromCustomInput = ref("");
+const selectValue = ref<string>("");
+
+const items = ref([
+  {
+    title: "First",
+    value: "one",
+  },
+  {
+    title: "Second",
+    value: "two",
+  },
+]);
+
+const addItem = () => {
+  items.value.push({
+    title: fromCustomInput.value,
+    value: fromCustomInput.value,
+  })
+  fromCustomInput.value = '';
+}
+
 </script>
 
 <style scoped></style>
