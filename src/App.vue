@@ -1,6 +1,7 @@
 <template>
   <div>
-    <custom-input
+    <router-view></router-view>
+    <!-- <custom-input
       v-model="fromCustomInput"
     ></custom-input>
     <input type="text">
@@ -11,7 +12,7 @@
       v-model="selectValue"
     ></custom-select>
     <button @click="toggle = !toggle">toggle</button>
-    <life-cycle v-if="toggle"></life-cycle>
+    <life-cycle v-if="toggle"></life-cycle> -->
   </div>
 </template>
 
