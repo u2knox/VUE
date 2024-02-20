@@ -14,8 +14,26 @@ export default <RouteRecordRaw[]>[
   {
     name: 'item',
     path: '/item/:id',
-    props: true,
+    props: route => {
+
+    },
     component: () => import('@/views/ItemView.vue')
   },
-  
+  {
+    name: 'catalog',
+    path: '/catalog',
+    component: () => import('@/views/CatalogView.vue'),
+    children: [
+      {
+        name: 'headphone',
+        path: 'headphone',
+        component: () => import('@/views/catalog/HeadphoneView.vue')
+      },
+      {
+        name: 'microphone',
+        path: 'microphone',
+        component: () => import('@/views/catalog/MicrophoneView.vue')
+      }
+    ]
+  }
 ]
