@@ -3,11 +3,11 @@
     <router-link :to="{ name: 'about' }">About</router-link>
     Home view
     <div>
-      <div v-for="user in users">
+      <div v-for="user in itemStore.users">
         <router-link :to="{
           name: 'item',
           params: {
-            id: user
+            id: user.id
           }
         }">open</router-link>
         <div>{{ user.name }}</div>
@@ -19,11 +19,16 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 
-const users = ref<any[]>([])
+import { useItemStore } from '@/store/ItemStore';
+
+const itemStore = useItemStore();
+
+//  Получите посты с jsonplace, запишите в стор
+// При открытие конкретного поста, брать данные о нем в сторе
 
 onMounted(async () => {
   const res = await fetch("https://jsonplaceholder.typicode.com/users");
-  users.value = await res.json();
+  itemStore.users = await res.json();
 })
 </script>
 

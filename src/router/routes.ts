@@ -14,9 +14,19 @@ export default <RouteRecordRaw[]>[
   {
     name: 'item',
     path: '/item/:id',
-    props: route => {
-
-    },
+    props: route => ({
+      id: parseInt(route.params.id as string),
+      type: 'mobile'
+    }),
+    component: () => import('@/views/ItemView.vue')
+  },
+  {
+    name: 'itemComp',
+    path: '/item-comp/:id',
+    props: route => ({
+      id: parseInt(route.params.id as string),
+      type: 'comp'
+    }),
     component: () => import('@/views/ItemView.vue')
   },
   {
